@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Ünlü;Selçuk;;;
+FN:Selçuk Ünlü
+TITLE:COO | Co-Founder
+ORG:Red Cat Quantum Labs
+TEL;TYPE=CELL,VOICE;VALUE=uri:tel:+905426616062
+EMAIL;TYPE=WORK,INTERNET:selcuk@rcql.com
+EMAIL;TYPE=HOME,INTERNET:info@rcql.com
+ADR;TYPE=WORK;POSTAL;PARCEL:;;Erenköy Mh. Gülbahçe Sk. No:4 D:4;Kadıköy;İstanbul;34738;Turkey
+URL;TYPE=Company:https://rcql.com
+URL;TYPE=Product:https://cryptnshare.com/en
+NOTE:Red Cat Quantum Labs (RCQL) - Post-Quantum Cryptography & CryptNShare (CNS)
+END:VCARD
