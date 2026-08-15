@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Selçuk Ünlü | Red Cat Quantum Labs</title>
+  <meta name="description" content="Selçuk Ünlü - COO | Co-Founder, Red Cat Quantum Labs Dijital Kartvizit">
+  <meta name="theme-color" content="#d31027">
+  
+  <!-- iOS & Android PWA Fullscreen Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Selçuk Ünlü">
+  <link rel="apple-touch-icon" href="assets/rcql-official-logo-light.png">
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/rcql-official-logo-light.png">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Remix Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+
+  <!-- Local Standalone QRCode Generator -->
+  <script src="assets/qr-generator.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient background -->
+  <div class="bg-glow"></div>
+
+  <!-- Fullscreen Centered Container -->
+  <div class="card-stage">
+
+    <div class="card-flipper-wrapper" id="cardWrapper">
+      <div class="business-card" id="businessCard">
+
+        <!-- FRONT FACE: Exact Physical Card Layout (Landscape) -->
+        <div class="card-face card-front">
+          <!-- Left Red Accent Bar -->
+          <div class="red-accent-bar"></div>
+          
+          <div class="card-body">
+            
+            <!-- Person Info Header -->
+            <div class="person-header">
+              <h1 class="person-name">
+                Selçuk Ünlü <span class="divider">|</span> <span class="role">COO</span> <span class="divider">|</span> <span class="role">Co-Founder</span>
+              </h1>
+              <div class="direct-contact">
+                <a href="tel:+905426616062" class="contact-link">+90 542 661 60 62</a>
+                <span class="divider">|</span>
+                <a href="mailto:selcuk@rcql.com" class="contact-link">selcuk@rcql.com</a>
+              </div>
+            </div>
+
+            <!-- Center QR Code -->
+            <div class="card-center-qr" id="qrContainer" title="Karekod">
+              <div id="cardQrCode"></div>
+            </div>
+
+            <!-- Company & Address Footer -->
+            <div class="company-footer">
+              <h2 class="company-name">RED CAT QUANTUM LABS</h2>
+              <p class="company-address">
+                Erenköy Mh. Gülbahçe Sk. No:4 D:4 Kadıköy 34738 İstanbul - TR
+              </p>
+              <div class="company-contact">
+                <a href="mailto:info@rcql.com" class="company-link">info@rcql.com</a>
+                <span class="divider">|</span>
+                <a href="https://rcql.com" target="_blank" rel="noopener" class="company-link">rcql.com</a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Flip Button -->
+          <button class="card-flip-btn" id="flipToBackBtn" title="Kartın arkasını çevir">
+            <i class="ri-repeat-2-line"></i> Logoyu Gör
+          </button>
+        </div>
+
+        <!-- BACK FACE: Official Logo Side (Landscape) -->
+        <div class="card-face card-back">
+          <div class="back-body">
+            <img src="assets/rcql-official-logo-light.png" alt="RCQL Logo" class="official-logo-img">
+          </div>
+          
+          <button class="card-flip-btn" id="flipToFrontBtn" title="Kartın ön yüzüne dön">
+            <i class="ri-repeat-2-line"></i> Bilgileri Gör
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Minimal Bottom Floating Action Bar -->
+    <div class="minimal-actions">
+      <a href="assets/selcuk_unlu.vcf" download="Selcuk_Unlu_RCQL.vcf" class="action-pill btn-primary" title="Rehbere Ekle">
+        <i class="ri-user-add-fill"></i>
+        <span>Rehbere Kaydet</span>
+      </a>
+
+      <button class="action-circle-btn" id="flipCardBtn" title="Kartı Çevir">
+        <i class="ri-repeat-line"></i>
+      </button>
+
+      <a href="tel:+905426616062" class="action-circle-btn" title="Hemen Ara">
+        <i class="ri-phone-fill"></i>
+      </a>
+
+      <a href="https://wa.me/905426616062" target="_blank" rel="noopener" class="action-circle-btn btn-wa" title="WhatsApp">
+        <i class="ri-whatsapp-fill"></i>
+      </a>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

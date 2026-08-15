@@ -1,0 +1,17 @@
+{
+  "name": "Selçuk Ünlü | Red Cat Quantum Labs",
+  "short_name": "Selçuk Ünlü",
+  "description": "Red Cat Quantum Labs - Selçuk Ünlü Dijital Kartvizit",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#d31027",
+  "icons": [
+    {
+      "src": "assets/rcql-logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
