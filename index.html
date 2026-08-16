@@ -59,9 +59,10 @@
               </div>
             </div>
 
-            <!-- Center QR Code -->
-            <div class="card-center-qr" id="qrContainer" title="Karekod">
+            <!-- PROMINENT CENTER QR CODE (Click to expand full screen modal) -->
+            <div class="card-center-qr" id="frontQrContainer" title="Tam ekran büyütmek için tıklayın">
               <div id="cardQrCode"></div>
+              <div class="qr-label"><i class="ri-qr-code-line"></i> Büyüt & Tarat</div>
             </div>
 
             <!-- Company & Address Footer -->
@@ -79,10 +80,17 @@
 
           </div>
 
-          <!-- Flip Button -->
-          <button class="card-flip-btn" id="flipToBackBtn" title="Kartın arkasını çevir">
-            <i class="ri-repeat-2-line"></i> Logoyu Gör
-          </button>
+          <!-- STACKED BUTTONS (Rehbere Kaydet & Logoyu Gör Equal Dimensions Stacked) -->
+          <div class="card-bottom-actions-stacked">
+            <a href="assets/selcuk_unlu.vcf" download="Selcuk_Unlu_RCQL.vcf" class="card-btn-stacked btn-primary" id="downloadVcfBtn" title="Rehbere Kaydet">
+              <i class="ri-user-add-fill"></i> Rehbere Kaydet
+            </a>
+
+            <button class="card-btn-stacked btn-secondary" id="flipToBackBtn" title="Kartın arkasını çevir">
+              <i class="ri-repeat-2-line"></i> Logoyu Gör
+            </button>
+          </div>
+
         </div>
 
         <!-- BACK FACE: Official Logo Side (Landscape) -->
@@ -91,34 +99,50 @@
             <img src="assets/rcql-official-logo-light.png" alt="RCQL Logo" class="official-logo-img">
           </div>
           
-          <button class="card-flip-btn" id="flipToFrontBtn" title="Kartın ön yüzüne dön">
-            <i class="ri-repeat-2-line"></i> Bilgileri Gör
-          </button>
+          <div class="card-bottom-actions-stacked">
+            <button class="card-btn-stacked btn-secondary" id="flipToFrontBtn" title="Kartın ön yüzüne dön">
+              <i class="ri-repeat-2-line"></i> Bilgileri Gör
+            </button>
+          </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Minimal Bottom Floating Action Bar -->
-    <div class="minimal-actions">
-      <a href="assets/selcuk_unlu.vcf" download="Selcuk_Unlu_RCQL.vcf" class="action-pill btn-primary" title="Rehbere Ekle">
-        <i class="ri-user-add-fill"></i>
-        <span>Rehbere Kaydet</span>
-      </a>
+  </div>
 
-      <button class="action-circle-btn" id="flipCardBtn" title="Kartı Çevir">
-        <i class="ri-repeat-line"></i>
+  <!-- FULLSCREEN QR CODE PRESENTATION MODAL -->
+  <div class="qr-modal-overlay" id="qrModal" aria-hidden="true">
+    <div class="qr-modal-card">
+      <button class="close-modal-btn" id="closeQrModalBtn" aria-label="Kapat">
+        <i class="ri-close-line"></i>
       </button>
+      
+      <div class="modal-header">
+        <img src="assets/rcql-official-logo-light.png" alt="RCQL Logo" class="modal-logo">
+        <div>
+          <h3 class="modal-title">Selçuk Ünlü</h3>
+          <p class="modal-subtitle">COO | Co-Founder • Red Cat Quantum Labs</p>
+        </div>
+      </div>
 
-      <a href="tel:+905426616062" class="action-circle-btn" title="Hemen Ara">
-        <i class="ri-phone-fill"></i>
-      </a>
+      <div class="modal-qr-wrapper">
+        <div id="modalQrCode"></div>
+        <div class="modal-qr-overlay-logo">
+          <img src="assets/rcql-official-logo-light.png" alt="RCQL">
+        </div>
+      </div>
 
-      <a href="https://wa.me/905426616062" target="_blank" rel="noopener" class="action-circle-btn btn-wa" title="WhatsApp">
-        <i class="ri-whatsapp-fill"></i>
-      </a>
+      <p class="modal-instruction">
+        <i class="ri-camera-fill"></i> Telefon kameranızla bu kare kodu okutarak iletişim bilgilerini doğrudan rehberinize ekleyebilirsiniz.
+      </p>
+
+      <div class="modal-actions">
+        <a href="assets/selcuk_unlu.vcf" download="Selcuk_Unlu_RCQL.vcf" class="btn btn-primary w-100">
+          <i class="ri-download-2-line"></i> vCard İndir (.vcf)
+        </a>
+      </div>
     </div>
-
   </div>
 
   <script src="app.js"></script>

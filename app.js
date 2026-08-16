@@ -15,15 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     'END:VCARD'
   ].join('\n');
 
-  // 2. Render Center QR Code
-  function renderQR() {
-    const container = document.getElementById('cardQrCode');
+  // 2. Render High-Res SVG QR Codes
+  function renderQR(containerId, cellSize = 3) {
+    const container = document.getElementById(containerId);
     if (!container) return;
     try {
       const qr = qrcode(0, 'M');
       qr.addData(vCardData);
       qr.make();
-      container.innerHTML = qr.createSvgTag(3, 0);
+      container.innerHTML = qr.createSvgTag(cellSize, 0);
       const svg = container.querySelector('svg');
       if (svg) {
         svg.style.width = '100%';
@@ -36,14 +36,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  renderQR();
+  function generateQRCodes() {
+    renderQR('cardQrCode', 3);
+    renderQR('modalQrCode', 7);
+  }
 
-  // 3. Card Flip Logic
+  generateQRCodes();
+
+  // 3. Elements
   const businessCard = document.getElementById('businessCard');
   const flipCardBtn = document.getElementById('flipCardBtn');
   const flipToBackBtn = document.getElementById('flipToBackBtn');
   const flipToFrontBtn = document.getElementById('flipToFrontBtn');
 
+  const frontQrContainer = document.getElementById('frontQrContainer');
+  const openFullQrBtn = document.getElementById('openFullQrBtn');
+  const qrModal = document.getElementById('qrModal');
+  const closeQrModalBtn = document.getElementById('closeQrModalBtn');
+
+  // 4. Card Flip Logic
   function toggleFlip() {
     businessCard.classList.toggle('is-flipped');
   }
@@ -52,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (flipToBackBtn) flipToBackBtn.addEventListener('click', toggleFlip);
   if (flipToFrontBtn) flipToFrontBtn.addEventListener('click', toggleFlip);
 
-  // Click card back to flip to front
   const cardBack = document.querySelector('.card-back');
   if (cardBack) {
     cardBack.addEventListener('click', (e) => {
@@ -62,7 +72,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. 3D Tilt Effect on Desktop
+  // 5. Fullscreen QR Modal Interactions
+  function openQrModal() {
+    qrModal.classList.add('is-active');
+    qrModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeQrModal() {
+    qrModal.classList.remove('is-active');
+    qrModal.setAttribute('aria-hidden', 'true');
+  }
+
+  if (frontQrContainer) frontQrContainer.addEventListener('click', openQrModal);
+  if (openFullQrBtn) openFullQrBtn.addEventListener('click', openQrModal);
+  if (closeQrModalBtn) closeQrModalBtn.addEventListener('click', closeQrModal);
+
+  qrModal.addEventListener('click', (e) => {
+    if (e.target === qrModal) closeQrModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && qrModal.classList.contains('is-active')) {
+      closeQrModal();
+    }
+  });
+
+  // 6. 3D Tilt Effect on Desktop
   if (window.innerWidth > 768) {
     const cardWrapper = document.getElementById('cardWrapper');
     if (cardWrapper) {

@@ -1,9 +1,10 @@
 :root {
   --brand-red: #d31027;
+  --brand-red-dark: #a80a1d;
   --text-dark: #111111;
   --bg-page: #0f172a;
   --card-bg: #ffffff;
-  --card-shadow: 0 25px 50px rgba(0, 0, 0, 0.35), 0 5px 15px rgba(0, 0, 0, 0.15);
+  --card-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.15);
   --font-heading: 'Rajdhani', -apple-system, sans-serif;
   --font-body: 'Inter', -apple-system, sans-serif;
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -34,7 +35,7 @@ html, body {
   transform: translate(-50%, -50%);
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(211, 16, 39, 0.22) 0%, rgba(211, 16, 39, 0) 70%);
+  background: radial-gradient(circle, rgba(211, 16, 39, 0.25) 0%, rgba(211, 16, 39, 0) 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -47,38 +48,31 @@ html, body {
   height: 100vh;
   height: 100dvh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 16px;
   perspective: 1200px;
 }
 
-/* LANDSCAPE BUSINESS CARD CONTAINER (3.5 : 2 ratio) */
+/* STRICT SLEEK PHYSICAL RECTANGLE CARD CONTAINER (Aspect ratio ~1.75:1) */
 .card-flipper-wrapper {
   width: 580px;
   height: 330px;
-  max-width: 95vw;
+  max-width: 92vw;
+  max-height: 52vw;
+  aspect-ratio: 1.75 / 1;
   position: relative;
   transition: transform 0.3s ease;
 }
 
-/* MOBILE PORTRAIT AUTO-LANDSCAPE ORIENTATION FIT */
+/* MOBILE PORTRAIT ORIENTATION AUTO-FIT (Rotates sleek rectangle for hand-held view) */
 @media (max-width: 640px) and (orientation: portrait) {
   .card-flipper-wrapper {
-    /* Rotate 90 degrees on portrait mobile screen so it opens LANDSCAPE automatically! */
-    width: 88vh;
-    height: 52vh;
+    width: 82vh;
+    height: 46vh;
     max-width: 520px;
-    max-height: 300px;
+    max-height: 295px;
     transform: rotate(90deg);
-  }
-
-  .minimal-actions {
-    transform: rotate(90deg);
-    position: absolute;
-    bottom: 24px;
-    right: -40px;
   }
 }
 
@@ -94,12 +88,6 @@ html, body {
 
 .business-card.is-flipped {
   transform: rotateY(180deg);
-}
-
-@media (max-width: 640px) and (orientation: portrait) {
-  .business-card.is-flipped {
-    transform: rotateY(180deg);
-  }
 }
 
 /* CARD FACES */
@@ -118,13 +106,13 @@ html, body {
   display: flex;
 }
 
-/* FRONT FACE (Landscape) */
+/* FRONT FACE (Horizontal Rectangle) */
 .card-front {
   flex-direction: row;
 }
 
 .red-accent-bar {
-  width: 22px;
+  width: 20px;
   height: 100%;
   background-color: var(--brand-red);
   flex-shrink: 0;
@@ -132,7 +120,7 @@ html, body {
 
 .card-body {
   flex: 1;
-  padding: 24px 28px;
+  padding: 22px 26px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -143,12 +131,12 @@ html, body {
 .person-header {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .person-name {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-weight: 700;
   color: var(--brand-red);
   letter-spacing: 0.5px;
@@ -158,7 +146,7 @@ html, body {
 .person-name .divider {
   color: var(--brand-red);
   font-weight: 400;
-  margin: 0 4px;
+  margin: 0 3px;
 }
 
 .person-name .role {
@@ -169,8 +157,8 @@ html, body {
 .direct-contact {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
+  gap: 6px;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-dark);
 }
@@ -192,28 +180,30 @@ html, body {
 /* Center QR Code */
 .card-center-qr {
   position: absolute;
-  top: 22px;
-  right: 28px;
+  top: 18px;
+  right: 24px;
   background: #ffffff;
-  padding: 6px;
+  padding: 5px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   transition: var(--transition-smooth);
   cursor: pointer;
+  z-index: 2;
 }
 
 .card-center-qr:hover {
   transform: scale(1.08);
   border-color: var(--brand-red);
+  box-shadow: 0 8px 20px rgba(211, 16, 39, 0.25);
 }
 
 #cardQrCode {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -224,35 +214,47 @@ html, body {
   height: 100% !important;
 }
 
+.qr-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--brand-red);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
 /* Company Footer Section */
 .company-footer {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 
 .company-name {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--brand-red);
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
 }
 
 .company-address {
-  font-size: 0.85rem;
-  line-height: 1.35;
+  font-size: 0.82rem;
+  line-height: 1.3;
   color: var(--text-dark);
   font-weight: 500;
-  max-width: 85%;
+  max-width: 74%;
 }
 
 .company-contact {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: 2px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
 }
 
@@ -267,26 +269,53 @@ html, body {
   text-decoration: underline;
 }
 
-/* Flip Button */
-.card-flip-btn {
+/* STACKED BUTTONS (REHBERE KAYDET & LOGOYU GÖR - EQUAL SIZES) */
+.card-bottom-actions-stacked {
   position: absolute;
   bottom: 12px;
-  right: 16px;
+  right: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 5;
+}
+
+.card-btn-stacked {
+  width: 130px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: var(--transition-smooth);
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--brand-red);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(211, 16, 39, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--brand-red-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
   background: rgba(211, 16, 39, 0.08);
   border: 1px solid rgba(211, 16, 39, 0.2);
   color: var(--brand-red);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: var(--transition-smooth);
 }
 
-.card-flip-btn:hover {
+.btn-secondary:hover {
   background: var(--brand-red);
   color: #ffffff;
 }
@@ -309,63 +338,185 @@ html, body {
 }
 
 .official-logo-img {
-  width: 160px;
-  height: 160px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
 }
 
-/* MINIMAL FLOATING ACTION BAR */
-.minimal-actions {
+/* FULLSCREEN QR CODE MODAL */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.action-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, var(--brand-red) 0%, #a80a1d 100%);
-  color: #ffffff;
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 8px 20px rgba(211, 16, 39, 0.4);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
   transition: var(--transition-smooth);
+  padding: 20px;
 }
 
-.action-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(211, 16, 39, 0.5);
+.qr-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
 }
 
-.action-circle-btn {
-  width: 44px;
-  height: 44px;
+.qr-modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px 22px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  transform: scale(0.85);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #111111;
+}
+
+.qr-modal-overlay.is-active .qr-modal-card {
+  transform: scale(1);
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  font-size: 1.3rem;
+  color: #475569;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  text-decoration: none;
-  cursor: pointer;
   transition: var(--transition-smooth);
 }
 
-.action-circle-btn:hover {
+.close-modal-btn:hover {
   background: var(--brand-red);
-  border-color: var(--brand-red);
-  transform: translateY(-2px);
+  color: #ffffff;
 }
 
-.btn-wa:hover {
-  background: #25d366;
-  border-color: #25d366;
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.modal-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand-red);
+}
+
+.modal-subtitle {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.modal-qr-wrapper {
+  position: relative;
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 18px;
+  border: 2px solid var(--brand-red);
+  box-shadow: 0 10px 25px rgba(211, 16, 39, 0.15);
+  margin-bottom: 16px;
+}
+
+#modalQrCode {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modalQrCode svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.modal-qr-overlay-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-qr-overlay-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-instruction {
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #475569;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+}
+
+.modal-instruction i {
+  font-size: 1.1rem;
+  color: var(--brand-red);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.w-100 {
+  width: 100%;
 }
