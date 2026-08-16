@@ -15,24 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
     'END:VCARD'
   ].join('\n');
 
-  // 2. Render High-Res SVG QR Codes
+  // 2. Render High-Res SVG QR Codes (Bulletproof double fallback)
   function renderQR(containerId, cellSize = 3) {
     const container = document.getElementById(containerId);
     if (!container) return;
+
+    function renderFallbackAPI() {
+      const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(vCardData)}`;
+      container.innerHTML = `<img src="${fallbackUrl}" alt="vCard QR Code" style="width:100%;height:100%;object-fit:contain;border-radius:4px;">`;
+    }
+
     try {
-      const qr = qrcode(0, 'M');
-      qr.addData(vCardData);
-      qr.make();
-      container.innerHTML = qr.createSvgTag(cellSize, 0);
-      const svg = container.querySelector('svg');
-      if (svg) {
-        svg.style.width = '100%';
-        svg.style.height = '100%';
-        svg.style.borderRadius = '4px';
-        svg.style.display = 'block';
+      if (typeof qrcode !== 'undefined') {
+        const qr = qrcode(0, 'M');
+        qr.addData(vCardData);
+        qr.make();
+        container.innerHTML = qr.createSvgTag(cellSize, 0);
+        const svg = container.querySelector('svg');
+        if (svg) {
+          svg.style.width = '100%';
+          svg.style.height = '100%';
+          svg.style.borderRadius = '4px';
+          svg.style.display = 'block';
+        }
+      } else {
+        renderFallbackAPI();
       }
     } catch (err) {
       console.error('QR error:', err);
+      renderFallbackAPI();
     }
   }
 
